@@ -23,16 +23,37 @@ public class Steinpyramide extends MiniApp
 			return (4);
 		else if (i == 6 || i == 7)
 			return (6);
-		else if (i == 8)
+		else if (i >= 8)
 			return (8);
 		else
 			return (1);
 
 	}
-
+	
+	public static int howmanyBricks(int length, int h)
+	{
+		int steine, i, l;
+		
+		steine = 0;
+		i = 0;
+		while (i <= h)
+		{
+			l = length;
+			while (l > 0)
+			{
+				steine++;
+				l -= whichBrick(l);
+			}
+			length -= 2;
+			i++;
+			
+		}
+		return (steine);
+		
+	}
 	public static void main(String[] args)
 	{
-		int ap, p, h, l, length, ende, i, steine, brick;
+		int ap, p, h, l, length, ende, i, brick;
 		Scanner sc = new Scanner(System.in);
 		
 		p = sc.nextInt();
@@ -40,17 +61,17 @@ public class Steinpyramide extends MiniApp
 		l = (h * 2) - 1;
 		ende = p + l;
 		i = 0;
-		steine = 1;
-		while (i < h && steine < ((h*h/4)+h))
+		System.out.println(howmanyBricks(l, h));
+		System.out.println((h*h/4)+h);
+		while (i < h)
 		{
 			ap = p;
 			length = l;
-			while (ap < ende && steine < ((h*h/4)+h))
+			while (ap < ende)
 			{
 				brick = whichBrick(length);
 				placeBrick(ap, true, brick);
 				ap += brick;
-				steine++;
 				length -= brick;
 			}
 			ende--;
