@@ -15,6 +15,7 @@ public class LooterLang
     public static String encode(String s)
     {
         int i, l;
+        char c;
         String lang;
 
         i = 0;
@@ -24,7 +25,13 @@ public class LooterLang
         {
             if (isConso(s.charAt(i)) == true)
             {
-                lang = lang + s.charAt(i) + 'o' + s.charAt(i);
+                if (s.charAt(i) >= 65 && s.charAt(i) <= 90)
+                {
+                    c = (char) (s.charAt(i) + 32);
+                    lang = lang + s.charAt(i) + 'o' + c;
+                }
+                else
+                    lang = lang + s.charAt(i) + 'o' + s.charAt(i);
             }
             else
                 lang = lang + s.charAt(i);
@@ -54,6 +61,6 @@ public class LooterLang
 
     public static void main(String[] args)
     {
-        System.out.println(encode("hallo mein name ist yannis!"));
+        System.out.println(encode("Hallo mein Name ist Yannis!"));
     }
 }
